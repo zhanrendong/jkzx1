@@ -1,7 +1,6 @@
 package tech.tongyu.bct.trade.api;
 
 import com.google.common.collect.Lists;
-import javafx.util.Pair;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
