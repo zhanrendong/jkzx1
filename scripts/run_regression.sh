@@ -11,14 +11,11 @@ if [ "$1" == "local" ]
     ./start_db_fresh.sh
     cat regression_trades.sql  | docker exec -i bct-postgresql psql -U bct
     cat regression_quotes.sql  | docker exec -i bct-postgresql psql -U bct
+    cd "$ROOT_PATH" || exit
+    pm2 start regression.config.js
   else
     echo "use set up db"
-    cat schemas.sql | psql -U bct
-    cat regression_trades.sql  | psql -U bct
-    cat regression_quotes.sql | psql -U bct
 fi
-cd "$ROOT_PATH" || exit
-pm2 start regression.config.js
 sleep 60
 export PYTHONPATH="$MINIMUM_PATH"
 python "$MINIMUM_PATH"/init_regression.py

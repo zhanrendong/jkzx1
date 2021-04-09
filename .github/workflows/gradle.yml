@@ -1,0 +1,75 @@
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: [ develop,release-* ]
+  pull_request:
+    branches: [ develop,release-* ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # Service containers to run with `container-job`
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres:9-alpine
+        # Provide the password for postgres
+        env:
+          POSTGRES_PASSWORD: kEaLJ9ZERLLN!
+          POSTGRES_USER: bct
+          POSTGRES_DB: bct
+        ports:
+          - 5432:5432
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up NPM
+      uses: actions/setup-node@v2-beta
+      with:
+        node-version: '12'
+    - name: Install PM2
+      run: npm install pm2 -g
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+    - name: Set up Python3.7
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.7'
+        architecture: 'x64'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    - name: Build with Gradle
+      run: ./gradlew --parallel build
+    - name: Install Artifacts
+      run: ./gradlew installLocal
+    - name: Import Schema
+      run: psql -d postgresql://bct@localhost/bct -f schemas.sql
+      working-directory: ./scripts/initialize/db
+      env:
+        PGPASSWORD: kEaLJ9ZERLLN!
+    - name: Import Trade Data
+      run: psql -d postgresql://bct@localhost/bct -f regression_trades.sql
+      working-directory: ./scripts/initialize/db
+      env:
+        PGPASSWORD: kEaLJ9ZERLLN!
+    - name: Import MarketData
+      run: psql -d postgresql://bct@localhost/bct -f regression_quotes.sql
+      working-directory: ./scripts/initialize/db
+      env:
+        PGPASSWORD: kEaLJ9ZERLLN!
+    - name: Launch Web Server
+      run: pm2 start regression.config.js
+      working-directory: ./install
+    - name: Regression Test
+      run: ./run_regression.sh
+      working-directory: ./install
