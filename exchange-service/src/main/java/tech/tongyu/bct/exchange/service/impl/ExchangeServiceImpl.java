@@ -2,7 +2,7 @@ package tech.tongyu.bct.exchange.service.impl;
 
 import com.google.common.collect.Lists;
 import io.vavr.Tuple4;
-import javafx.util.Pair;
+import org.apache.commons.math3.util.Pair;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
