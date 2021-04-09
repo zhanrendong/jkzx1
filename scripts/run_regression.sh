@@ -16,7 +16,13 @@ if [ "$1" == "local" ]
   else
     echo "use set up db"
 fi
-sleep 60
+for (( c=1; c<=60; c++ ))
+do  
+   echo "check server status: $c"
+   pm2 list
+   pm2 log
+   sleep 1
+done
 export PYTHONPATH="$MINIMUM_PATH"
 python "$MINIMUM_PATH"/init_regression.py
 export PYTHONPATH="$AIRFLOW_PATH"
