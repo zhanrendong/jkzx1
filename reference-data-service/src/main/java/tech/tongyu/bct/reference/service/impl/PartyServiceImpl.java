@@ -1,6 +1,5 @@
 package tech.tongyu.bct.reference.service.impl;
-
-import javafx.util.Pair;
+import org.apache.commons.math3.util.Pair;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
