@@ -45,6 +45,7 @@ jobs:
         architecture: 'x64'
     - name: Install dependencies
       run: |
+        cat ./scripts/airflow/requirements.txt
         python -m pip install --upgrade pip
         pip install -r ./scripts/airflow/requirements.txt
     - name: Grant execute permission for gradlew
