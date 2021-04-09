@@ -1,0 +1,68 @@
+rootProject.name = 'cloud3'
+include ':core'
+include ':market-data-service'
+include ':model-service'
+include ':reference-data-service'
+include ':rpc-client'
+include ':rpc-server'
+include ':servers:zuul-server'
+include ':servers:quant-server:server'
+include ':servers:quant-server:quantlib'
+include ':servers:quant-server'
+include ':servers:bct-server'
+include ':servers'
+include ':trades'
+include ':trades:trade-service'
+//include ':trades:trade-bitemp-model'
+include ':trades:trade-snapshot-model'
+include ':pricing-service'
+include ':user-preference-service'
+include ':quant-service'
+include ':report-service'
+include ':workflow-service'
+include ':bitemporal'
+include ':commerce-model'
+include ':quant-priceable-model'
+include ':auth-service'
+include ':servers:acl'
+include ':utility'
+include ':exchange-service'
+include ':document-service'
+include ':servers:document-server'
+include ':risk-control-service'
+
+project(':servers:acl').projectDir = "$rootDir/servers/acl" as File
+project(':core').projectDir = "$rootDir/core" as File
+project(':auth-service').projectDir = "$rootDir/auth-service" as File
+project(':workflow-service').projectDir = "$rootDir/workflow-service" as File
+project(':market-data-service').projectDir = "$rootDir/market-data-service" as File
+project(':model-service').projectDir = "$rootDir/model-service" as File
+project(':reference-data-service').projectDir = "$rootDir/reference-data-service" as File
+project(':rpc-client').projectDir = "$rootDir/rpc-client" as File
+project(':rpc-server').projectDir = "$rootDir/rpc-server" as File
+project(':servers:zuul-server').projectDir = "$rootDir/servers/zuul-server" as File
+project(':servers:quant-server:server').projectDir = "$rootDir/servers/quant-server/server" as File
+project(':servers:quant-server:quantlib').projectDir = "$rootDir/servers/quant-server/quantlib" as File
+project(':servers:quant-server').projectDir = "$rootDir/servers/quant-server" as File
+project(':servers:bct-server').projectDir = "$rootDir/servers/bct-server" as File
+project(':servers').projectDir = "$rootDir/servers" as File
+project(':pricing-service').projectDir = "$rootDir/pricing-service" as File
+project(':user-preference-service').projectDir = "$rootDir/user-preference-service" as File
+project(':quant-service').projectDir = "$rootDir/quant-service" as File
+project(':report-service').projectDir = "$rootDir/report-service" as File
+project(':trades:trade-service').projectDir = "$rootDir/trades/trade-service" as File
+//project(':trades:trade-bitemp-model').projectDir  ="$rootDir/trades/trade-bitemp-model" as File
+project(':trades:trade-snapshot-model').projectDir = "$rootDir/trades/trade-snapshot-model" as File
+project(':trades').projectDir = "$rootDir/trades" as File
+project(':bitemporal').projectDir = "$rootDir/bitemporal" as File
+project(':commerce-model').projectDir = "$rootDir/commerce-model" as File
+project(':quant-priceable-model').projectDir = "$rootDir/quant-priceable-model" as File
+project(':utility').projectDir = "$rootDir/utility" as File
+project(':exchange-service').projectDir = "$rootDir/exchange-service" as File
+project(':document-service').projectDir = "$rootDir/document-service" as File
+project(':servers:document-server').projectDir = "$rootDir/servers/document-server" as File
+project(':risk-control-service').projectDir = "$rootDir/risk-control-service" as File
+
+findProject(':servers:document-server')?.name = 'document-server'
+include 'document-service'
+

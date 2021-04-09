@@ -1,0 +1,11 @@
+instrument_id,asset_class,asset_sub_class,instrument_info,instrument_type
+AU9999.SGE,COMMODITY,PRECIOUS_METAL,"{'@class': 'tech.tongyu.bct.market.dto.CommoditySpotInfo', 'name': 'SGE黄金9999', 'exchange': 'SGE', 'unit': '元/克', 'tradeUnit': 0.0, 'tradeCategory': 0.0, 'multiplier': 10}",SPOT
+RB2002.SHF,COMMODITY,OTHERS,"{'@class': 'tech.tongyu.bct.market.dto.CommodityFuturesInfo', 'name': '螺纹钢2002', 'exchange': 'SHFE', 'unit': 0.0, 'tradeUnit': 0.0, 'tradeCategory': 0.0, 'multiplier': 3268, 'maturity': '2020-02-17'}",FUTURES
+RB2009.SHF,COMMODITY,OTHERS,"{'@class': 'tech.tongyu.bct.market.dto.CommodityFuturesInfo', 'name': '螺纹钢2009', 'exchange': 'SHFE', 'unit': 0.0, 'tradeUnit': 0.0, 'tradeCategory': 0.0, 'multiplier': 3350, 'maturity': '2020-09-15'}",FUTURES
+RB2005.SHF,COMMODITY,OTHERS,"{'@class': 'tech.tongyu.bct.market.dto.CommodityFuturesInfo', 'name': '螺纹钢2005', 'exchange': 'SHFE', 'unit': 0.0, 'tradeUnit': 0.0, 'tradeCategory': 0.0, 'multiplier': 3327, 'maturity': '2020-05-15'}",FUTURES
+RB2004.SHF,COMMODITY,OTHERS,"{'@class': 'tech.tongyu.bct.market.dto.CommodityFuturesInfo', 'name': '螺纹钢2004', 'exchange': 'SHFE', 'unit': 0.0, 'tradeUnit': 0.0, 'tradeCategory': 0.0, 'multiplier': 3501, 'maturity': '2020-04-15'}",FUTURES
+RB2003.SHF,COMMODITY,OTHERS,"{'@class': 'tech.tongyu.bct.market.dto.CommodityFuturesInfo', 'name': '螺纹钢2003', 'exchange': 'SHFE', 'unit': 0.0, 'tradeUnit': 0.0, 'tradeCategory': 0.0, 'multiplier': 3258, 'maturity': '2020-03-16'}",FUTURES
+RB2001.SHF,COMMODITY,OTHERS,"{'@class': 'tech.tongyu.bct.market.dto.CommodityFuturesInfo', 'name': '螺纹钢2001', 'exchange': 'SHFE', 'unit': 0.0, 'tradeUnit': 0.0, 'tradeCategory': 0.0, 'multiplier': 3292, 'maturity': '2020-01-15'}",FUTURES
+RB2007.SHF,COMMODITY,OTHERS,"{'@class': 'tech.tongyu.bct.market.dto.CommodityFuturesInfo', 'name': '螺纹钢2007', 'exchange': 'SHFE', 'unit': 0.0, 'tradeUnit': 0.0, 'tradeCategory': 0.0, 'multiplier': 3520, 'maturity': '2020-07-15'}",FUTURES
+000905.SH,EQUITY,INDEX,"{'@class': 'tech.tongyu.bct.market.dto.EquityIndexInfo', 'name': '中证500', 'exchange': 'SSE', 'unit': 0.0, 'tradeUnit': 0.0, 'tradeCategory': 0.0}",INDEX
+600030.SH,EQUITY,EQUITY,"{'@class': 'tech.tongyu.bct.market.dto.EquityStockInfo', 'name': 0.0, 'exchange': 'OTHER_EXCHANGE', 'unit': 0.0, 'tradeUnit': 0.0, 'tradeCategory': 0.0, 'multiplier': 1}",STOCK

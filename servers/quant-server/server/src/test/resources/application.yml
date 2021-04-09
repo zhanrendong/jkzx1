@@ -1,0 +1,56 @@
+server:
+  port: 16011
+spring:
+  application:
+    name: quant-service
+  main:
+    web-environment: true
+#  cloud:
+#    config:
+#      uri: http://${CONFIG_HOST:localhost}:8888
+#      enabled: true
+#      discovery:
+#        enabled: true
+#        service-id: config-server
+  sleuth:
+    sampler:
+      percentage: 1.0f
+  redis:
+      database: 1
+      host: ${REDIS_HOST:10.1.2.55}
+      port: 6379
+      password:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+      timeout: 0
+
+zipkin:
+  storage:
+    type: elasticsearch
+    elasticsearch:
+      http-logging: BODY
+
+#eureka:
+#  client:
+#    serviceUrl:
+#        defaultZone: http://localhost:8761/eureka/
+#  instance:
+#    instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+
+eureka:
+  instance:
+    non-secure-port: ${server.port:16011}
+    metadata-map:
+      instanceId: ${spring.application.name}:${random.value}
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_HOST:localhost}:${eureka.port:8761}/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5

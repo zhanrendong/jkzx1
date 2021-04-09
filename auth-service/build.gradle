@@ -1,0 +1,8 @@
+dependencies {
+    compile project(':core')
+    compile project(':servers:acl')
+    compile group: 'com.github.penggle', name: 'kaptcha', version: '2.3.2'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: "${springBootVersion}"
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: "${springBootVersion}"
+    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+}

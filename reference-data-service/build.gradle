@@ -1,0 +1,7 @@
+
+dependencies {
+    compile project(':core')
+    compile project(':utility')
+    compile project(':quant-service')
+    testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+}

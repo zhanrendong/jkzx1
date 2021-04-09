@@ -1,0 +1,8 @@
+dependencies {
+    compile project(':core')
+    compile group: 'org.freemarker', name: 'freemarker', version: "${freeMarkerVersion}"
+    compile group: 'org.apache.poi', name: 'poi', version: '4.1.0'
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.0'
+    compile group: 'org.apache.poi', name: 'poi-scratchpad', version: '4.1.0'
+    testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+}

@@ -1,0 +1,24 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: "${springBootVersion}"
+    }
+}
+
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'document-server'
+}
+
+description = 'document-server'
+
+dependencies {
+    compile project(':core')
+    compile project(':document-service')
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'2.0.4.RELEASE'
+    compile group: 'org.postgresql', name: 'postgresql', version: "${postgreVersion}"
+}

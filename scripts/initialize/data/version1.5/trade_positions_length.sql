@@ -1,0 +1,1 @@
+alter table trade_snapshot_model.trade alter column positions type VARCHAR(1000);

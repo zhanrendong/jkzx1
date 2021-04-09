@@ -1,0 +1,38 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: "${springBootVersion}"
+    }
+}
+
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'bct-server'
+}
+
+description = 'bct-server'
+
+dependencies {
+    compile project(':report-service')
+    compile project(':core')
+    compile project(':servers:acl')
+    compile project(':auth-service')
+    compile project(':exchange-service')
+    compile project(':market-data-service')
+    compile project(':model-service')
+    compile project(':reference-data-service')
+    compile project(':user-preference-service')
+    compile project(':pricing-service')
+    compile project(':quant-service')
+    compile project(':trades:trade-snapshot-model')
+    compile project(':trades:trade-service')
+    compile project(':rpc-server')
+    compile project(':rpc-client')
+    compile project(':document-service')
+    compile project(':risk-control-service')
+    compile group: 'org.postgresql', name: 'postgresql', version: "${postgreVersion}"
+}

@@ -1,0 +1,273 @@
+allprojects {
+    group = 'tech.tongyu.bct'
+    version = '3.0'
+}
+
+apply plugin: 'java'
+
+
+def bctDistHost = '10.1.5.16'
+def bctDistPort = '22'
+def bctDistUser = 'tongyu'
+def bctDistPassword = 'tongyu808'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.hidetake:gradle-ssh-plugin:2.9.0"
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.7"
+    }
+}
+
+apply plugin: 'org.hidetake.ssh'
+apply plugin: "org.sonarqube"
+
+sonarqube {
+    properties {
+        property "sonar.sourceEncoding", "UTF-8"
+    }
+}
+
+project(":servers:zuul-server") {
+    sonarqube {
+        skipProject = true
+    }
+}
+
+ 
+subprojects {
+    apply plugin: 'java'
+    ext {
+        encoding = 'UTF-8'
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+        junitVersion = '4.12'
+        springBootVersion = '2.0.4.RELEASE'
+        springSecurityVersion = '5.1.0.RELEASE'
+        springCloudVersion = 'Finchley.RELEASE'
+        jacksonVersion = '2.9.6'
+        postgreVersion = '42.2.2'
+        vavrVersion = '0.9.2'
+        freeMarkerVersion = '2.3.28'
+        commonsLang3Version = '3.7'
+        guavaVersion = '26.0-jre'
+        defaultEnv = 'dev'
+        webAppRemoteHost = '10.1.2.60'
+        webAppRemotePort = '22'
+        jasyptVersion = '2.1.0'
+        webAppRemoteUser = 'gitlab-runner'
+        webAppRemotePassword = 'tongyu@808'
+        webAppRemoteFolder = branch.equals("master") ? 'FE-prod' : (branch.startsWith("release") ? 'FE-release' : 'FE-test')
+        webAppRemoteVersion = 'last'
+        webAppRemotePath = "${webAppRemoteFolder}/${webAppRemoteVersion}"
+        webAppDistPath = "${projectDir}/src/main/resources/static"
+    }
+    configurations{
+        coberturaRuntime {extendsFrom testRuntime}
+    }
+ 
+    dependencies {
+        coberturaRuntime 'net.sourceforge.cobertura:cobertura:2.1.1'
+    }
+
+    def serFile="${project.buildDir}/cobertura.ser"
+    def classes="${project.buildDir}/classes/java/main"
+    def classesCopy="${classes}-copy"
+
+    task cobertura(type: Test){
+        dependencies {
+            testRuntime 'net.sourceforge.cobertura:cobertura:2.1.1'
+        }
+ 
+        systemProperty "net.sourceforge.cobertura.datafile", serFile
+    }
+
+
+    cobertura.doFirst  {
+         logger.quiet "Instrumenting classes for Cobertura"
+         ant {
+             delete(file:serFile, failonerror:false)
+             delete(dir: classesCopy, failonerror:false)
+             copy(todir: classesCopy) { fileset(dir: classes) }
+ 
+             taskdef(resource:'tasks.properties', classpath: configurations.coberturaRuntime.asPath)
+             'cobertura-instrument'(datafile: serFile) {
+                 fileset(dir: classes,
+                   includes:"**/*.class",
+                   excludes:"**/*Test.class")
+             }
+         }
+    }
+    
+    cobertura.doLast{
+        if (new File(classesCopy).exists()) {
+            //create html cobertura report
+            ant.'cobertura-report'(destdir:"${project.reportsDir}/cobertura",
+                format:'html', srcdir:"src/main/java", datafile: serFile)
+            //create xml cobertura report
+            ant.'cobertura-report'(destdir:"${project.reportsDir}/cobertura",
+                format:'xml', srcdir:"src/main/java", datafile: serFile)
+            ant.delete(file: classes)
+            ant.move(file: classesCopy, tofile: classes)
+       }
+    }
+	
+    sonarqube {
+        properties {
+            property "sonar.sources", "src/main/java"
+        }
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-logging', version: "${springBootVersion}"
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "${springBootVersion}"
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: "${jacksonVersion}"
+        compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: "${jacksonVersion}"
+        compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: "${jacksonVersion}"
+        compile group: 'org.apache.commons', name: 'commons-lang3', version: "${commonsLang3Version}"
+        compile group: 'com.google.guava', name: 'guava', version: "${guavaVersion}"
+        compile group: 'io.vavr', name: 'vavr', version: "${vavrVersion}"
+        compile group: 'org.freemarker', name: 'freemarker', version: "${freeMarkerVersion}"
+        compile group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot-starter', version: "${jasyptVersion}"
+        testCompile group: 'junit', name: 'junit', version: "${junitVersion}"
+        testCompile group: 'org.springframework', name: 'spring-test', version: "${junitVersion}"
+
+        testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: "${springBootVersion}"
+    }
+
+    test {
+        testLogging {
+            showStandardStreams = true
+        }
+    }
+
+    clean.doFirst {
+        delete "${projectDir}/target"
+        delete "${projectDir}/out"
+    }
+
+    compileJava {
+        options.compilerArgs << '-parameters'
+    }
+
+    compileTestJava {
+        options.compilerArgs << '-parameters'
+    }
+
+    assemble.doLast {
+        println("copying built jar from ${buildDir}/libs to ${projectDir}/target")
+        copy {
+            from "${buildDir}/libs"
+            include "*.jar"
+            into "${projectDir}/target"
+        }
+    }
+
+}
+
+remotes {
+    bctServer {
+        host = "$bctDistHost"
+        port = "$bctDistPort".toInteger()
+        user = "$bctDistUser"
+        password = "$bctDistPassword"
+        knownHosts = allowAnyHosts
+    }
+}
+
+
+project.task("installLocal") {
+    doLast {
+        delete "$rootDir/install"
+        mkdir "$rootDir/install"
+        mkdir "$rootDir/install/bin"
+        mkdir "$rootDir/install/scripts"
+        println("copying scripts/* from $rootDir to $rootDir/install/scripts")
+        copy {
+            from "$rootDir/scripts"
+            exclude "bct.config.js"
+            into "$rootDir/install/scripts"
+        }
+        copy {
+            from "$rootDir/scripts"
+            include "*.js"
+            into "$rootDir/install"
+        }
+        copy {
+            from "$rootDir/scripts"
+            include "*.sh"
+            into "$rootDir/install"
+        }
+        println("copying built jar from $rootDir/servers/bct-server/target to $rootDir/install/bin")
+        copy {
+            from "$rootDir/servers/bct-server/target"
+            include "*.jar"
+            into "$rootDir/install/bin"
+        }
+        println("copying built jar from $rootDir/servers/zuul-server/target to $rootDir/install/bin")
+        copy {
+            from "$rootDir/servers/zuul-server/target"
+            include "*.jar"
+            into "$rootDir/install/bin"
+        }
+        println("copying built jar from $rootDir/workflow-service/target to $rootDir/install/bin")
+        copy {
+            from "$rootDir/workflow-service/target"
+            include "*.jar"
+            into "$rootDir/install/bin"
+        }
+    }
+}
+
+project.task("deploy") {
+    doLast {
+        if(branch.startsWith("release")){
+            remotes.bctServer.host = "10.1.5.23"
+        }
+        if(branch.equals("master")){
+            remotes.bctServer.host = "10.1.5.24"
+        }
+        ssh.run {
+            session(remotes.bctServer) {
+                executeScript('''#!/bin/sh
+                file="bct"
+                if [ ! -d $file ]
+                then
+                    mkdir $file
+                fi
+                ''')
+                execute 'rm -rf bct/install'
+                println("pushing install/* from $rootDir to $bctDistUser@$bctDistHost:bct")
+                put from: "$rootDir/install", into: "bct"
+                println("starting bct server in the folder of $bctDistUser@$bctDistHost:bct/install")
+                executeScript('''#!/bin/sh
+                cd bct/install
+                pm2 delete all
+                pm2 start bct.config.js
+                ''')
+            }
+        }
+        println("automatic deployment done")
+    }
+}
+
+task smokeTest(type:Exec) {
+    workingDir 'install/scripts/smoke_test'
+    commandLine './test.sh'
+}
+
+task copyScripts(type:Exec) {
+    workingDir 'install/scripts/'
+    commandLine './deploy_airflow.sh'
+}
+

@@ -1,0 +1,1 @@
+update reference_data_service.party set party_status = 0  where party_status is null;

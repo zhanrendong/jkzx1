@@ -1,0 +1,71 @@
+server:
+  port: ${BCT_SERVER_PORT:16003}
+spring:
+  profiles:
+    active: postgres
+  application:
+    name: document-server
+  jpa:
+    show-sql: false
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+          lob:
+            non_contextual_creation: true
+  redis:
+    database: 0
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    password:
+  data:
+    rest:
+      detection-strategy: annotated
+settings:
+  timezone: Asia/Shanghai
+  secret: dkJ34Bdadf098adf
+  issuer: tongyu.tech
+  env: ${ENV:dev}
+admin:
+  pwd: 79f9JvYen5BPzejXZn7ZrQ==
+  rule: tongyu808
+
+---
+#oracle
+spring:
+  profiles: oracle
+  datasource:
+    platform: oracle
+    url: jdbc:oracle:thin:@${ORACLE_DB_IP:localhost}:${ORACLE_DB_PORT:1521}:xe
+    username: ${ORACLE_DB_USERNAME:system}
+    password: ${ORACLE_DB_PASSWORD:oracle}
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database: oracle
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+---
+# postgres
+spring:
+  profiles: postgres
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/bct?characterEncoding=UTF-8&stringtype=unspecified
+    username: bct
+    password: ENC(DX645enPruKhvfG4JBQkMKDyAs2Z/oux)
+    initialization-mode: always
+  jpa:
+    properties:
+      generate-ddl: true
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL94Dialect
+        ddl-auto: update
+
+jasypt:
+  encryptor:
+    password: 9KWMfztlXqzRjokKMpoYeQ==

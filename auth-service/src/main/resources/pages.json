@@ -1,0 +1,156 @@
+{
+  "pageName": "default",
+  "sort": 0,
+  "children": [
+    { "pageName": "dashboard", "sort": 100, "children": null },
+    { "pageName": "userInfo", "sort": 200, "children": null },
+    {
+      "pageName": "tradeManagement",
+      "sort": 300,
+      "children": [
+        { "pageName": "booking", "sort": 301, "children": null },
+        { "pageName": "contractManagement", "sort": 311, "children": null },
+        { "pageName": "pricing", "sort": 321, "children": null },
+        { "pageName": "notifications", "sort": 331, "children": null },
+        { "pageName": "marketManagement", "sort": 341, "children": null },
+        { "pageName": "subjectStore", "sort": 351, "children": null },
+        { "pageName": "bookEdit", "sort": 361, "children": null },
+        { "pageName": "onBoardTransaction", "sort": 371, "children": null },
+        { "pageName": "portfolioManagement", "sort": 381, "children": null },
+        { "pageName": "tradeDocuments", "sort": 391, "children": null },
+        { "pageName": "pricingManagement", "sort": 302, "children": null }
+      ]
+    },
+    {
+      "pageName": "pricingSettings",
+      "sort": 400,
+      "children": [
+        { "pageName": "volSurface", "sort": 401, "children": null },
+        { "pageName": "riskFreeCurve", "sort": 411, "children": null },
+        { "pageName": "dividendCurve", "sort": 421, "children": null },
+        { "pageName": "baseContractManagement", "sort": 431, "children": null },
+        { "pageName": "pricingEnvironment", "sort": 441, "children": null },
+        { "pageName": "customModel", "sort": 451, "children": null }
+      ]
+    },
+    { "pageName": "clientManagement",
+      "sort": 500,
+      "children": [
+        { "pageName": "clientInfo", "sort": 501, "children": null },
+        { "pageName": "salesManagement", "sort": 511, "children": null },
+        { "pageName": "bankAccount", "sort": 521, "children": null },
+        { "pageName": "fundStatistics", "sort": 531, "children": null },
+        { "pageName": "marginManagement", "sort": 541, "children": null },
+        { "pageName": "ioglodManagement", "sort": 551, "children": null },
+        { "pageName": "discrepancyManagement", "sort": 561, "children": null },
+        { "pageName": "valuationManagement", "sort": 571, "children": null }
+      ]
+    },
+    { "pageName": "customSalesManage", "sort": 600, "children": null },
+    { "pageName": "customValuation", "sort": 700, "children": null },
+    { "pageName": "customInfo", "sort": 800, "children": null },
+    {
+      "pageName": "workflowManagement",
+      "sort": 1000,
+      "children": [
+        { "pageName": "workflowSettings", "sort": 1001, "children": null },
+        { "pageName": "processManagement", "sort": 1011, "children": null }
+      ]
+    },
+    {
+      "pageName": "reports",
+      "sort": 1100,
+      "children": [
+        { "pageName": "spotLadder", "sort": 1101, "children": null },
+        { "pageName": "eodPosition", "sort": 1111, "children": null },
+        { "pageName": "eodRiskByUnderlyer", "sort": 1121, "children": null },
+        { "pageName": "eodDailyPnlByUnderlyer", "sort": 1131, "children": null },
+        {
+          "pageName": "eodHistoricalPnlByUnderlyer",
+          "sort": 1141,
+          "children": null
+        },
+        { "pageName": "tradingStatements", "sort": 1151, "children": null },
+        { "pageName": "fundsDetailedStatements", "sort": 1161, "children": null },
+        { "pageName": "customerFundsSummaryStatements", "sort": 1171, "children": null },
+        { "pageName": "reportsCustomManagement", "sort": 1181, "children": null }
+      ]
+    },
+    {
+      "pageName": "approvalProcess",
+      "sort": 1200,
+      "children": [
+        { "pageName": "approvalProcessManagement", "sort": 1201, "children": null },
+        { "pageName": "auditingManagement", "sort": 1211, "children": null },
+        { "pageName": "processConfiguration", "sort": 1221, "children": null },
+        { "pageName": "triggerManagement", "sort": 1231, "children": null }
+      ]
+    },
+    {
+      "pageName": "systemSettings",
+      "sort": 1300,
+      "children": [
+        { "pageName": "calendars", "sort": 1301, "children": null },
+        { "pageName": "riskSettings", "sort": 1311, "children": null },
+        { "pageName": "roleManagement", "sort": 1322, "children": null },
+        { "pageName": "users", "sort": 1331, "children": null },
+        { "pageName": "department", "sort": 1341, "children": null },
+        { "pageName": "resources", "sort": 1351, "children": null },
+        { "pageName": "tradeBooks", "sort": 1361, "children": null },
+        { "pageName": "volatilityCalendar", "sort": 1371, "children": null},
+        { "pageName": "documentManagement", "sort": 1381, "children": null },
+        { "pageName": "operationLog", "sort": 1391, "children": null }
+      ]
+    },
+    {
+      "pageName": "riskManager",
+      "sort": 1400,
+      "children": [
+        { "pageName": "intradayPositionReport", "sort": 1401, "children": null },
+        {
+          "pageName": "intradayRiskByUnderlyerReport",
+          "sort": 1411,
+          "children": null
+        },
+        {
+          "pageName": "intradayDailyPnlByUnderlyerReport",
+          "sort": 1421,
+          "children": null
+        },
+        {
+          "pageName": "intradayExpiringPositionReport",
+          "sort": 1431,
+          "children": null
+        },
+        {
+          "pageName": "customReport",
+          "sort": 1431,
+          "children": null
+        },
+        {
+          "pageName": "portfolioRisk",
+          "sort": 1441,
+          "children": null
+        }
+      ]
+    },
+    {"pageName": "help", "sort": 1500, "children": null},
+    {
+      "pageName": "center",
+      "sort": 1600,
+      "children": [
+        {"pageName": "centerUnderlying", "sort": 1601, "children": null },
+        {"pageName": "centerRisk", "sort": 1602, "children": null},
+        {"pageName": "centerScenario", "sort": 1603, "children": null},
+        {
+          "pageName": "market",
+          "sort": 1604,
+          "children": [
+            {"pageName": "centerOperationQuality", "sort": 1605, "children": null},
+            {"pageName": "centerRiskMonitoring", "sort": 1606, "children": null}
+          ]
+        }
+      ]
+    }
+  ]
+}

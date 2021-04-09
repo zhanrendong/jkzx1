@@ -1,0 +1,47 @@
+[
+  {
+    "bookName": "options1",
+    "underlyerInstrumentId": "600030.SH",
+    "dailyPnl": -48935.659784002615,
+    "dailyOptionPnl": -43935.659784002615,
+    "dailyUnderlyerPnl": -5000.0,
+    "pnlContributionNew": -41880.864284002615,
+    "pnlContributionSettled": -2054.7955,
+    "pnlContributionDelta": 0,
+    "pnlContributionGamma": 0,
+    "pnlContributionVega": 0,
+    "pnlContributionTheta": 0,
+    "pnlContributionRho": 0,
+    "pnlContributionUnexplained": 0.0
+  },
+  {
+    "bookName": "options1",
+    "underlyerInstrumentId": "RB1912.SHF",
+    "dailyPnl": 27329.871463343734,
+    "dailyOptionPnl": 27329.871463343734,
+    "dailyUnderlyerPnl": 0.0,
+    "pnlContributionNew": 22329.871463343734,
+    "pnlContributionSettled": 5000.0,
+    "pnlContributionDelta": 0,
+    "pnlContributionGamma": 0,
+    "pnlContributionVega": 0,
+    "pnlContributionTheta": 0,
+    "pnlContributionRho": 0,
+    "pnlContributionUnexplained": 0.0
+  },
+  {
+    "bookName": "options2",
+    "underlyerInstrumentId": "000300.SH",
+    "dailyPnl": 35407.4746335654,
+    "dailyOptionPnl": 35407.4746335654,
+    "dailyUnderlyerPnl": 0,
+    "pnlContributionNew": 35407.474633565405,
+    "pnlContributionSettled": 0,
+    "pnlContributionDelta": 0,
+    "pnlContributionGamma": 0,
+    "pnlContributionVega": 0,
+    "pnlContributionTheta": 0,
+    "pnlContributionRho": 0,
+    "pnlContributionUnexplained": -7.275957614183426e-12
+  }
+]

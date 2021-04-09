@@ -1,0 +1,79 @@
+apply plugin: 'org.springframework.boot'
+apply plugin: 'org.hidetake.ssh'
+apply plugin: 'io.spring.dependency-management'
+
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.hidetake:gradle-ssh-plugin:2.9.0")
+    }
+}
+
+
+jar {
+    baseName = 'zuul-server'
+}
+
+description = 'zuul-server'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation('org.springframework.cloud:spring-cloud-starter-netflix-zuul')
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+remotes {
+    distServer {
+        host = "${webAppRemoteHost}"
+        port = "${webAppRemotePort}".toInteger()
+        user = "${webAppRemoteUser}"
+        password = "${webAppRemotePassword}"
+        knownHosts = allowAnyHosts
+    }
+}
+
+compileJava.doFirst {
+    if(!"_master".equals(branch)){
+        ssh.run {
+            session(remotes.distServer) {
+                executeScript('''#!/bin/sh
+                file="''' + "${webAppRemotePath}" + '''"
+                if [ ! -d $file ]
+                then
+                    echo 0
+                fi
+                ''') { result ->
+                    if (result == '') {
+                        println "cleaning the web app in the dist directory ${webAppDistPath}"
+                        delete "${webAppDistPath}"
+                        mkdir "${webAppDistPath}"
+                        println "pulling the web app from the remote directory ${webAppRemoteUser}@${webAppRemoteHost}:${webAppRemotePath}"
+                        get from: "${webAppRemotePath}", into: "${webAppDistPath}"
+                        copy {
+                            from "${webAppDistPath}/${webAppRemoteVersion}"
+                            into "${webAppDistPath}"
+                        }
+                        delete "${webAppDistPath}/${webAppRemoteVersion}"
+                    } else {
+                        println "the remote directory ${webAppRemoteUser}@${webAppRemoteHost}:${webAppRemotePath} does not exist"
+                    }
+                }
+
+            }
+        }
+    }
+}

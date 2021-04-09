@@ -1,0 +1,288 @@
+{
+  "processDefinitions": [
+    {
+      "processName": "财务出入金",
+      "request":[
+        {
+          "service":"reference-data-service",
+          "method":"cliFundEventSave"
+        }
+      ],
+      "taskNode":[
+        {
+          "nodeName":"录入资金流水",
+          "nodeType":"INPUT_DATA",
+          "sequence": -1,
+          "actionClass": "tech.tongyu.bct.workflow.process.func.action.cap.FundInputTaskAction"
+        },{
+          "nodeName":"修改资金流水",
+          "nodeType":"MODIFY_DATA",
+          "sequence": -2,
+          "actionClass": "tech.tongyu.bct.workflow.process.func.action.cap.FundInputTaskAction"
+        },{
+          "nodeName":"复核资金流水",
+          "nodeType":"REVIEW_DATA",
+          "sequence": 0,
+          "actionClass": "tech.tongyu.bct.workflow.process.func.action.cap.FundReviewTaskAction"
+        }
+      ],
+      "config":[
+        {
+          "configName":"can_start_by_self",
+          "configNickName":"不允许审批自己发起的审批单"
+        }
+      ],
+      "processFilters": [
+        {
+          "taskType": "none",
+          "filterType": "PROCESS_STARTABLE",
+          "filterName": "processFilter",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.cap.FundInputReviewFilterImpl"
+        },
+        {
+          "taskType": "REVIEW_DATA",
+          "filterName": "filterName3",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.cap.FundInputReviewFilterImpl",
+          "filterType": "TASK_COMPLETABLE"
+        },
+        {
+          "taskType": "REVIEW_DATA",
+          "filterName": "filterName3",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.cap.FundInputReviewFilterImpl",
+          "filterType": "TASK_READABLE"
+        },
+        {
+          "taskType": "COUNTER_SIGN_DATA",
+          "filterName": "filterName3",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.cap.FundInputReviewFilterImpl",
+          "filterType": "TASK_COMPLETABLE"
+        },
+        {
+          "taskType": "COUNTER_SIGN_DATA",
+          "filterName": "filterName3",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.cap.FundInputReviewFilterImpl",
+          "filterType": "TASK_READABLE"
+        },
+        {
+          "taskType": "MODIFY_DATA",
+          "filterName": "filterName3",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.cap.FundInputFilterImpl",
+          "filterType": "TASK_READABLE"
+        }
+      ]
+    },
+    {
+      "processName": "交易录入",
+      "request":[
+        {
+          "service":"trade-service",
+          "method":"trdTradeCreate"
+        }
+      ],
+      "taskNode":[
+        {
+          "nodeName":"录入交易流水",
+          "nodeType":"INPUT_DATA",
+          "sequence": -1,
+          "actionClass": "tech.tongyu.bct.workflow.process.func.action.trade.TradeInputTaskAction"
+        },{
+          "nodeName":"修改交易流水",
+          "nodeType":"MODIFY_DATA",
+          "sequence": -2,
+          "actionClass": "tech.tongyu.bct.workflow.process.func.action.trade.TradeInputTaskAction"
+        },{
+          "nodeName":"复核交易流水",
+          "nodeType":"REVIEW_DATA",
+          "sequence": 0,
+          "actionClass": "tech.tongyu.bct.workflow.process.func.action.trade.TradeReviewTaskAction"
+        }
+      ],
+      "config":[
+        {
+          "configName":"can_start_by_self",
+          "configNickName":"不允许审批自己发起的审批单"
+        }
+      ],
+      "processFilters": [
+        {
+          "taskType": "none",
+          "filterType": "PROCESS_STARTABLE",
+          "filterName": "processFilter",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.trade.TradeInputReviewFilterImpl"
+        },
+        {
+          "taskType": "REVIEW_DATA",
+          "filterName": "filterName3",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.trade.TradeInputReviewFilterImpl",
+          "filterType": "TASK_COMPLETABLE"
+        },
+        {
+          "taskType": "COUNTER_SIGN_DATA",
+          "filterName": "filterName3",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.trade.TradeInputReviewFilterImpl",
+          "filterType": "TASK_COMPLETABLE"
+        },
+        {
+          "taskType": "COUNTER_SIGN_DATA",
+          "filterName": "filterName3",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.trade.TradeInputReviewFilterImpl",
+          "filterType": "TASK_READABLE"
+        },
+        {
+          "taskType": "REVIEW_DATA",
+          "filterName": "filterName3",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.trade.TradeInputReviewFilterImpl",
+          "filterType": "TASK_READABLE"
+        },
+        {
+          "taskType": "MODIFY_DATA",
+          "filterName": "filterName3",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.trade.TradeInputFilterImpl",
+          "filterType": "TASK_READABLE"
+        }
+      ]
+    },
+    {
+      "processName": "授信额度变更",
+      "request":[
+        {
+          "service":"reference-data-service",
+          "method":"clientUpdateCredit"
+        }
+      ],
+      "taskNode":[
+        {
+          "nodeName":"录入授信额度",
+          "nodeType":"INPUT_DATA",
+          "sequence": -1,
+          "actionClass": "tech.tongyu.bct.workflow.process.func.action.credit.CreditInputTaskAction"
+        },{
+          "nodeName":"修改授信额度",
+          "nodeType":"MODIFY_DATA",
+          "sequence": -2,
+          "actionClass": "tech.tongyu.bct.workflow.process.func.action.credit.CreditInputTaskAction"
+        },{
+          "nodeName":"复核授信额度",
+          "nodeType":"REVIEW_DATA",
+          "sequence": 0,
+          "actionClass": "tech.tongyu.bct.workflow.process.func.action.credit.CreditReviewTaskAction"
+        }
+      ],
+      "config":[
+        {
+          "configName":"can_start_by_self",
+          "configNickName":"不允许审批自己发起的审批单"
+        }
+      ],
+      "processFilters": [
+        {
+          "taskType": "none",
+          "filterType": "PROCESS_STARTABLE",
+          "filterName": "processFilter",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.credit.CreditInputReviewFilterImpl"
+        },
+        {
+          "taskType": "REVIEW_DATA",
+          "filterName": "filterName3",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.credit.CreditInputReviewFilterImpl",
+          "filterType": "TASK_COMPLETABLE"
+        },
+        {
+          "taskType": "REVIEW_DATA",
+          "filterName": "filterName3",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.credit.CreditInputReviewFilterImpl",
+          "filterType": "TASK_READABLE"
+        },
+        {
+          "taskType": "COUNTER_SIGN_DATA",
+          "filterName": "filterName3",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.credit.CreditInputReviewFilterImpl",
+          "filterType": "TASK_COMPLETABLE"
+        },
+        {
+          "taskType": "COUNTER_SIGN_DATA",
+          "filterName": "filterName3",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.credit.CreditInputReviewFilterImpl",
+          "filterType": "TASK_READABLE"
+        },
+        {
+          "taskType": "MODIFY_DATA",
+          "filterName": "filterName3",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.credit.CreditInputFilterImpl",
+          "filterType": "TASK_READABLE"
+        }
+      ]
+    },
+    {
+      "processName": "开户",
+      "request":[
+        {
+          "service":"reference-data-service",
+          "method":"refPartySave"
+        }
+      ],
+      "taskNode":[
+        {
+          "nodeName":"录入开户信息",
+          "nodeType":"INPUT_DATA",
+          "sequence": -1,
+          "actionClass": "tech.tongyu.bct.workflow.process.func.action.account.AccountInputTaskAction"
+        },{
+          "nodeName":"修改开户信息",
+          "nodeType":"MODIFY_DATA",
+          "sequence": -2,
+          "actionClass": "tech.tongyu.bct.workflow.process.func.action.account.AccountInputTaskAction"
+        },{
+          "nodeName":"复核开户信息",
+          "nodeType":"REVIEW_DATA",
+          "sequence": 0,
+          "actionClass": "tech.tongyu.bct.workflow.process.func.action.account.AccountReviewTaskAction"
+        }
+      ],
+      "config":[
+        {
+          "configName":"can_start_by_self",
+          "configNickName":"不允许审批自己发起的审批单"
+        }
+      ],
+      "processFilters": [
+        {
+          "taskType": "none",
+          "filterType": "PROCESS_STARTABLE",
+          "filterName": "processFilter",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.account.AccountInputReviewFilterImpl"
+        },
+        {
+          "taskType": "REVIEW_DATA",
+          "filterName": "filterName3",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.account.AccountInputReviewFilterImpl",
+          "filterType": "TASK_COMPLETABLE"
+        },
+        {
+          "taskType": "REVIEW_DATA",
+          "filterName": "filterName3",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.account.AccountInputReviewFilterImpl",
+          "filterType": "TASK_READABLE"
+        },
+        {
+          "taskType": "COUNTER_SIGN_DATA",
+          "filterName": "filterName3",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.account.AccountInputReviewFilterImpl",
+          "filterType": "TASK_COMPLETABLE"
+        },
+        {
+          "taskType": "COUNTER_SIGN_DATA",
+          "filterName": "filterName3",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.account.AccountInputReviewFilterImpl",
+          "filterType": "TASK_READABLE"
+        },
+        {
+          "taskType": "MODIFY_DATA",
+          "filterName": "filterName3",
+          "filterClass": "tech.tongyu.bct.workflow.process.filter.account.AccountInputFilterImpl",
+          "filterType": "TASK_READABLE"
+        }
+      ]
+    }
+  ]
+}

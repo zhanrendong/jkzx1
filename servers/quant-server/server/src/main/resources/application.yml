@@ -1,0 +1,5 @@
+server:
+  port: ${QUANT_SERVICE_PORT:16011}
+spring:
+  application:
+    name: quant-service

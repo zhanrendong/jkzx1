@@ -1,0 +1,11 @@
+
+dependencies {
+    compile project(':core')
+    compile project(':bitemporal')
+    compile group: 'com.squareup', name: 'javapoet', version: '1.11.1'
+    compile group: 'com.github.javaparser', name: 'javaparser-core', version: '3.6.26'
+    compile group: 'com.google.auto.service', name: 'auto-service', version: '1.0-rc4'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.2'
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.1'
+    compile fileTree(dir:'lib',include:['*.jar'])
+}

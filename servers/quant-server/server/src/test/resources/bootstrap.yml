@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    config:
+      enabled: false
+  sleuth:
+    enabled: ${SLEUTH_ENABLED:false}
+  zipkin:
+    enabled: ${ZIPKIN_ENABLED:false}
+eureka:
+  client:
+    enabled: ${EUREKA_ENABLED:false}

@@ -1,0 +1,7 @@
+
+dependencies {
+    compile project(':commerce-model')
+    compile project(':quant-priceable-model')
+    compile project(':utility')
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: "${springBootVersion}"
+}

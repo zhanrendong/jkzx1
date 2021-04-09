@@ -1,0 +1,1 @@
+cat create_airflow.sql | docker exec -i bct-postgresql psql -U bct

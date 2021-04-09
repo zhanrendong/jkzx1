@@ -1,0 +1,1 @@
+update workflow_service.attachment set attachment_path = replace(attachment_path, 'workflow-service/files/', '/home/tongyu/workflow-service/');

@@ -1,0 +1,53 @@
+[
+  {
+    "bookName": "options1",
+    "underlyerInstrumentId": "600030.SH",
+    "underlyerPrice": 24.0,
+    "underlyerPriceChangePercent": -0.041666666666666664,
+    "underlyerNetPosition": -10000.0,
+    "delta": 55312.88527935077,
+    "deltaCash": 1087509.2467044184,
+    "netDelta": 45312.88527935077,
+    "deltaDecay": 701.5882368669604,
+    "deltaWithDecay": 56014.47351621773,
+    "gamma": -979.194558301979,
+    "gammaCash": -23500.669399247483,
+    "vega": -245.266120674595,
+    "theta": -83.39190973783222,
+    "rho": 759.1320011778585
+  },
+  {
+    "bookName": "options1",
+    "underlyerInstrumentId": "RB1912.SHF",
+    "underlyerPrice": 5220.0,
+    "underlyerPriceChangePercent": 0.0038314176245210726,
+    "underlyerNetPosition": 600.0,
+    "delta": -214.28534938244383,
+    "deltaCash": 20134304.762236387,
+    "netDelta": 385.7146506175562,
+    "deltaDecay": 20.373210781851473,
+    "deltaWithDecay": -193.91213860059236,
+    "gamma": -61.54680942209711,
+    "gammaCash": -321274.34518334693,
+    "vega": -12213.716621042071,
+    "theta": 12689.028457626486,
+    "rho": -260.0136979780155
+  },
+  {
+    "bookName": "options2",
+    "underlyerInstrumentId": "000300.SH",
+    "underlyerPrice": 4080.0,
+    "underlyerPriceChangePercent": 0.0196078431372549,
+    "underlyerNetPosition": 0,
+    "delta": 247.4585993015707,
+    "deltaCash": 1009631.0851504084,
+    "netDelta": 247.4585993015707,
+    "deltaDecay": -52.258509362308104,
+    "deltaWithDecay": 195.2000899392626,
+    "gamma": -49.28680173668088,
+    "gammaCash": -201090.151085658,
+    "vega": -2125.678906196828,
+    "theta": 1432.4686150505631,
+    "rho": 347.79579626916785
+  }
+]

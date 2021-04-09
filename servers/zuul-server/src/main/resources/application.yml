@@ -1,0 +1,73 @@
+server:
+  port: 80
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  application:
+    name: zuul-server
+  resources:
+    chain:
+      gzipped: true
+      cache: true
+zuul:
+  host:
+    connect-timeout-millis: 3000000
+    socket-timeout-millis: 3000000
+  add-host-header: true
+  stripPrefix: true
+  sensitive-headers: # required to pass jwt
+  routes:
+    auth-service:
+      path: /auth-service/**
+      url: http://${AUTH_SERVICE_HOST:localhost}:${AUTH_SERVICE_PORT:16000}/
+      sensitive-headers:
+    excel-service:
+      path: /excel-service/**
+      serviceId: http://${EXCEL_SERVICE_HOST:localhost}:${EXCEL_SERVICE_PORT:16000}/excel/
+    quant-service:
+      path: /quant-service/**
+      serviceId: http://${QUANT_SERVICE_HOST:localhost}:${QUANT_SERVICE_PORT:16000}/
+    trade-service:
+      path: /trade-service/**
+      serviceId: http://${TRADE_SERVICE_HOST:localhost}:${TRADE_SERVICE_PORT:16000}/
+    report-service:
+      path: /report-service/**
+      serviceId: http://${REPORT_SERVICE_HOST:localhost}:${REPORT_SERVICE_PORT:16000}/
+    exchange-service:
+      path: /exchange-service/**
+      serviceId: http://${EXCHANGE_SERVICE_HOST:localhost}:${EXCHANGE_SERVICE_PORT:16000}/
+    market-data-service:
+      path: /market-data-service/**
+      serviceId: http://${MARKET_DATA_SERVICE_HOST:localhost}:${MARKET_DATA_SERVICE_PORT:16000}/
+    model-service:
+      path: /model-service/**
+      serviceId: http://${MODEL_SERVICE_HOST:localhost}:${MODEL_SERVICE_PORT:16000}/
+    pricing-service:
+      path: /pricing-service/**
+      serviceId: http://${PRICING_SERVICE_HOST:localhost}:${PRICING_SERVICE_PORT:16000}/
+    reference-data-service:
+      path: /reference-data-service/**
+      serviceId: http://${REFERENCE_DATA_SERVICE_HOST:localhost}:${REFERENCE_DATA_SERVICE_PORT:16000}/
+    user-preference-service:
+      path: /user-preference-service/**
+      serviceId: http://${USER_PREFERENCE_SERVICE_HOST:localhost}:${USER_PREFERENCE_SERVICE_PORT:16000}/
+    document-service:
+      path: /document-service/**
+      serviceId: http://${DOCUMENT_SERVICE_HOST:localhost}:${DOCUMENT_SERVICE_PORT:16000}/
+    download-file:
+      path: /download-file/**
+      serviceId: http://${DOWNLOAD_FILE_HOST:localhost}:${DOWNLOAD_FILE_PORT:16003}/
+    workflow-service:
+      path: /workflow-service/**
+      serviceId: http://${WORKFLOW_SERVICE_HOST:localhost}:${WORKFLOW_SERVICE_PORT:16001}/
+    airflow-service:
+      serviceId: http://${AIRFLOW_SERVICE_HOST:localhost}:${AIRFLOW_SERVICE_PORT:8080}/
+    risk-control-service:
+      path: /risk-control-service/**
+      serviceId: http://${RISK_CONTROL_SERVICE_HOST:localhost}:${RISK_CONTROL_SERVICE_PORT:16000}/
+    data-service:
+      path: /data-service/**
+      serviceId: http://${DATA_SERVICE_HOST:localhost}:${DATA_SERVICE_HOST:18000}/

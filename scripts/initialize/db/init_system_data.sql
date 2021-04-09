@@ -1,0 +1,3 @@
+INSERT INTO "auth_service"."auth_ip_valid_username"("id", "created_at", "ip", "updated_at", "username") VALUES ('10000', '2020-05-27 14:35:24', '127.0.0.1', '2020-05-27 14:35:26', 'admin');
+INSERT INTO "auth_service"."auth_ip_valid_username"("id", "created_at", "ip", "updated_at", "username") VALUES ('10001', '2020-05-27 14:35:24', '127.0.0.1', '2020-05-27 14:35:26', 'trader1');
+INSERT INTO "auth_service"."auth_ip_valid_username"("id", "created_at", "ip", "updated_at", "username") VALUES ('10002', '2020-05-27 14:35:24', '127.0.0.1', '2020-05-27 14:35:26', 'trader2');

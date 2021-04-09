@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: risk-engine
+logging:
+  level:
+    tech.tongyu: INFO

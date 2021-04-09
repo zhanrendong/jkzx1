@@ -1,0 +1,53 @@
+[
+  {
+    "bookName": "options1",
+    "underlyerInstrumentId": "600030.SH",
+    "pnl": -48941.97252662766,
+    "optionPremium": -6698.630099999999,
+    "optionUnwindAmount": 1000,
+    "optionSettleAmount": -4109.59,
+    "optionMarketValue": -34133.75242662766,
+    "optionPnl": -43941.97252662766,
+    "underlyerBuyAmount": 0,
+    "underlyerSellAmount": 235000,
+    "underlyerNetPosition": -10000,
+    "underlyerPrice": 24,
+    "underlyerMarketValue": -240000,
+    "underlyerPnl": -5000,
+    "pricingEnvironment": "DEFAULT_CLOSE"
+  },
+  {
+    "bookName": "options1",
+    "underlyerInstrumentId": "RB1912.SHF",
+    "pnl": 284739.338951947,
+    "optionPremium": -490000,
+    "optionUnwindAmount": 100000,
+    "optionSettleAmount": 40000,
+    "optionMarketValue": 154739.338951947,
+    "optionPnl": -195260.661048053,
+    "underlyerBuyAmount": 31320000,
+    "underlyerSellAmount": 0,
+    "underlyerNetPosition": 600,
+    "underlyerPrice": 5300,
+    "underlyerMarketValue": 3180000,
+    "underlyerPnl": 480000,
+    "pricingEnvironment": "DEFAULT_CLOSE"
+  },
+  {
+    "bookName": "options2",
+    "underlyerInstrumentId": "000300.SH",
+    "pnl": 27828.095447806583,
+    "optionPremium": 84520.5479,
+    "optionUnwindAmount": 0,
+    "optionSettleAmount": 0,
+    "optionMarketValue": -56692.45245219342,
+    "optionPnl": 27828.095447806583,
+    "underlyerBuyAmount": 0,
+    "underlyerSellAmount": 0,
+    "underlyerNetPosition": 0,
+    "underlyerPrice": 4050.0,
+    "underlyerMarketValue": 0,
+    "underlyerPnl": 0,
+    "pricingEnvironment": "DEFAULT_CLOSE"
+  }
+]

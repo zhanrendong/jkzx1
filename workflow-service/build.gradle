@@ -1,0 +1,39 @@
+plugins {
+    id("org.springframework.boot") version "2.1.0.RELEASE"
+    id("io.spring.dependency-management") version "1.0.6.RELEASE"
+}
+
+springBoot {
+    mainClassName = 'tech.tongyu.bct.workflow.WorkflowDemoApplication'
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+repositories {
+    maven { url "https://artifacts.alfresco.com/nexus/content/repositories/activiti-releases/" }
+    maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+bootJar {
+    excludes = ["*.pom"]
+}
+
+dependencies {
+    compile project(':core')
+    compile project(':utility')
+    compile project(':auth-service')
+    compile project(':servers:acl')
+    compile project(':rpc-server')
+    compile project(':rpc-client')
+
+    compile group: 'org.activiti', name: 'activiti-spring-boot-starter', version:'7.0.103'
+    compile group: 'org.activiti', name: 'activiti-image-generator', version:'7.0.65'
+    compile group: 'org.activiti', name: 'activiti-bpmn-layout', version: '7.0.65'
+
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.2'
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.1.Final'
+    compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: '1.0.2.Final'
+    compile group: 'org.springframework', name: 'spring-test', version:'5.1.5.RELEASE'
+}
