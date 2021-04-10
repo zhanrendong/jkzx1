@@ -140,8 +140,8 @@ def call_terminal_request(ip, service, method, params, headers):
         res = requests.post(url, json=body, headers=headers)
         json = res.json()
         if 'error' in json:
-            logging.info("failed execute " + method + " to:" + ip + ",error:" + json['message'])
-            raise RuntimeError('error execute in: ' + json['message'])
+            logging.info("failed execute " + method + " to:" + ip + ",error:" + str(json))
+            raise RuntimeError('error execute in: ' + str(json))
         else:
             logging.info("success execute " + method + ",callRequest:" + str(len(params)) + " to " + ip)
             return json['result']
