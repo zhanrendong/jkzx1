@@ -17,6 +17,7 @@ pg_terminal_show_sql = TerminalDBConfig.show_sql
 bct_host = BCTServerConfig.host
 bct_user = BCTServerConfig.username
 bct_password = BCTServerConfig.password
+bct_port = BCTServerConfig.port
 special_captcha = BCTServerConfig.special_captcha
 bct_login_body = {
     'userName': bct_user,
@@ -25,6 +26,7 @@ bct_login_body = {
 
 # terminal
 terminal_host = TerminalServerConfig.host
+terminal_port = TerminalServerConfig.port
 ENV_TERMINAL_SERVICE_HOST = 'ENV_TERMINAL_SERVICE_HOST'
 
 # 定价，情景分析接口数量限制

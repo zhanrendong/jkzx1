@@ -5,7 +5,7 @@ import requests
 import numpy as np
 import os
 from datetime import datetime, timedelta
-from config.bct_config import special_captcha
+from config.bct_config import special_captcha, bct_port
 
 
 def get_bct_host():
@@ -13,7 +13,7 @@ def get_bct_host():
 
 
 def get_bct_port():
-    return os.getenv('BCT_PORT', '80')
+    return os.getenv('BCT_PORT', bct_port)
 
 
 def get_redis_conn(ip):

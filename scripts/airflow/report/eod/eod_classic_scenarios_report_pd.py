@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+from market_data.data_config import terminal_hostport
 from utils import utils
-from config.bct_config import terminal_host, ENV_TERMINAL_SERVICE_HOST, MAX_PRICING_TRADES_NUM
+from config.bct_config import ENV_TERMINAL_SERVICE_HOST, MAX_PRICING_TRADES_NUM
 import numpy as np
 from pandas.io.json import json_normalize
 import os
@@ -29,7 +30,7 @@ def price_scenarios(trades, shock, scenario_type, ip, headers, valuation_date, p
 
 
 def get_all_instrument_scenario_shock_dict(instrument_ids, headers):
-    host = terminal_host
+    host = terminal_hostport
     if ENV_TERMINAL_SERVICE_HOST in os.environ:
         host = os.getenv(ENV_TERMINAL_SERVICE_HOST)
     classic_scenarios_dates = ['2008-09-16', '2015-06-26', '2018-03-22']

@@ -166,7 +166,7 @@ def get_terminal_instruments_list(token):
         'tradeDate': datetime.now().strftime(_date_fmt2),
         'filtering': False
     }
-    return call_terminal_request(terminal_host, 'data-service', 'getInstrumentIdList', params, headers)
+    return call_terminal_request(terminal_hostport, 'data-service', 'getInstrumentIdList', params, headers)
 
 
 def get_terminal_quotes_list_by_instruments_and_dates(instrument_ids, trade_dates, terminal_host, token):
@@ -327,7 +327,7 @@ def update_market_instrument(instrument_instances, terminal_instrument_ids, inst
         end = start + BATCH_SIZE
         terminal_quotes.extend(get_terminal_quotes_list_by_instruments_and_dates(all_ids_to_save[start:end],
                                                                                  [current_date.strftime(_date_fmt2)],
-                                                                                 terminal_host, token))
+                                                                                 terminal_hostport, token))
     terminal_quotes_dict = {}
     for quote in terminal_quotes:
         terminal_quotes_dict[quote.get('instrumentId').upper()] = quote.get('closePrice')

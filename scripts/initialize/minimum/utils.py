@@ -2,16 +2,21 @@
 import requests
 from gmssl.sm4 import CryptSM4, SM4_ENCRYPT
 import base64
+import os
 
 ENCODING_UTF8 = 'utf-8'
 KEY = 'KaYup#asD1%79iYu'
 special_captcha = 'CAPTCHA@tongyu%bct78'
 
 
+def bct_port():
+    return os.getenv('BCT_PORT', bct_port)
+
+
 def login(username, password, host):
     """ Log in to get a token for subsequent remote calls
     """
-    url = 'http://' + host + ':80/auth-service/users/login'
+    url = 'http://' + host + ':' + bct_port() + '/auth-service/users/login'
     body = {
         'username': encrypt_data_cbc(username),
         'password': encrypt_data_cbc(password),
@@ -52,7 +57,7 @@ def call(method, params, service, host, token=None):
             2. The error is from the remote service. This is raised when
                 the returned result contains an error field.
     """
-    url = 'http://' + host + ':80/' + ('' if service is None else (service + '/')) + 'api/rpc'
+    url = 'http://' + host + ':' + bct_port() + '/' + ('' if service is None else (service + '/')) + 'api/rpc'
     body = {
         "method": method,
         "params": params
@@ -72,7 +77,7 @@ def call(method, params, service, host, token=None):
 
 
 def call_request(method, params, service, host, token=None):
-    url = 'http://' + host + ':80/' + ('' if service is None else (service + '/')) + 'api/rpc'
+    url = 'http://' + host + ':' + bct_port() + '/' + ('' if service is None else (service + '/')) + 'api/rpc'
     body = {
         "method": method,
         "params": params
