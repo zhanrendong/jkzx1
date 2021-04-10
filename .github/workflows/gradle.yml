@@ -4,8 +4,6 @@
 name: Java CI with Gradle
 
 on:
-  push:
-    branches: [ develop,release-* ]
   pull_request:
     branches: [ develop,release-* ]
   # Allows you to run this workflow manually from the Actions tab
