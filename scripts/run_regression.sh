@@ -16,12 +16,12 @@ if [ "$1" == "local" ]
   else
     echo "use set up db"
 fi
-for (( c=1; c<=45; c++ ))
+for (( c=1; c<=10; c++ ))
 do  
    echo "check server status: $c"
    pm2 list
    pm2 log --nostream
-   sleep 1
+   sleep 5
 done
 export BCT_PORT="16016"
 export PYTHONPATH="$MINIMUM_PATH"
