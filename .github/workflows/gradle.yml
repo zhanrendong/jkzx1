@@ -26,6 +26,10 @@ jobs:
           POSTGRES_DB: bct
         ports:
           - 5432:5432
+      redis:
+        image: redis:alpine
+        ports:
+          - 6379:6379
     steps:
     - uses: actions/checkout@v2
     - name: Set up NPM
