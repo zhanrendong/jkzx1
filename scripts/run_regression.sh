@@ -29,3 +29,9 @@ python "$MINIMUM_PATH"/init_regression.py
 export PYTHONPATH="$AIRFLOW_PATH"
 export TERMINAL_ENV=regression
 python "$AIRFLOW_PATH"/regression/f2b_regression.py
+rc=$?
+if [[ $rc != 0 ]]
+  then
+    pm2 log --nostream --lines 500
+    exit $rc;
+fi
