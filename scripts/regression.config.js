@@ -12,7 +12,7 @@ module.exports = {
         args: ['-jar', '-Xms128m', '-Xmx2g', 'bin/zuul-server-3.0.jar']
     },{
         name: 'ironman',
-        script: 'python3',
+        script: 'python',
         args: ['scripts/airflow/terminal/run.py'],
         env: {
             PYTHONPATH: "scripts/airflow/"
