@@ -48,6 +48,18 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        pip uninstall Flask
+        pip uninstall Flask-Admin
+        pip uninstall Flask-AppBuilder
+        pip uninstall Flask-Babel
+        pip uninstall Flask-Bcrypt
+        pip uninstall Flask-Caching
+        pip uninstall Flask-JWT-Extended
+        pip uninstall Flask-Login
+        pip uninstall Flask-OpenID
+        pip uninstall Flask-SQLAlchemy
+        pip uninstall flask-swagger
+        pip uninstall Flask-WTF
         pip install -r ./scripts/airflow/requirements.txt
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
