@@ -8,6 +8,7 @@ import json
 from config.bct_config import pg_url
 from terminal import Logging
 import pandas as pd
+import chardet
 import numpy as np
 
 logging = Logging.getLogger(__name__)
@@ -96,7 +97,13 @@ def db_to_record(tbl):
 
 
 def file_to_record(path):
-    with open(path) as f:
+    # get file's encoding
+    tmpfile = open(path, mode='rb')
+    data = tmpfile.read()
+    encoding = chardet.detect(data)["encoding"]
+    logging.info('file:%s encoding is %s' %(tmpfile.name,encoding))
+
+    with open(path, encoding=encoding) as f:
         rows = [{k: v for k, v in row.items()}
                 for row in csv.DictReader(f, skipinitialspace=True)]
         return rows
