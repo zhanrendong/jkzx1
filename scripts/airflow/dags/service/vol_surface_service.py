@@ -276,7 +276,7 @@ class VolSurfaceService(object):
             if np.isnan(vs_dto.modelInfo.underlyer.quote):
                 vs_dto.modelInfo.underlyer.quote = 1
             TerminalVolSurfaceService.save_vol_surface(session, vs_dto)
-            model_info = vol_surface_schema.dump(vs_dto).data['modelInfo']
+            model_info = vol_surface_schema.dump(vs_dto)['modelInfo']
             model_info['instance'] = VOL_SURFACE_INSTANCE
             model_info['valuationDate'] = val_date.strftime(DATE_FMT)
             model_info['useCalendarForTenor'] = True

@@ -13,4 +13,4 @@ class CommodityFutureContractHandler(JsonRpcHandler):
                 db_session, variety_type, [],
                 DateTimeUtils.str2date(start_date), DateTimeUtils.str2date(end_date))
             fc_info_schema = FutureContractInfoSchema(many=True)
-            return fc_info_schema.dump(fc_info_list).data
+            return fc_info_schema.dump(fc_info_list)

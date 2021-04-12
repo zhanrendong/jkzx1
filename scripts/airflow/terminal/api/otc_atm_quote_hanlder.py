@@ -15,7 +15,7 @@ class OtcAtmQuoteHandler(JsonRpcHandler):
             atm_vol_list, diagnostics = OtcAtmQuoteService.calc_instrument_atm_vol_list(
                 db_session, underlyder, DateTimeUtils.str2date(start_date), DateTimeUtils.str2date(end_date), is_primary)
         realized_vol_schema = RealizedVolSchema(many=True, exclude=['instrumentId', 'window', 'percentile'])
-        return DiagnosticResponse(realized_vol_schema.dump(atm_vol_list).data, diagnostics)
+        return DiagnosticResponse(realized_vol_schema.dump(atm_vol_list), diagnostics)
 
     @method
     async def get_instrument_atm_quote_list(self, underlyer, start_date, end_date, is_primary=False):
@@ -23,7 +23,7 @@ class OtcAtmQuoteHandler(JsonRpcHandler):
             atm_quote_dto_list = OtcAtmQuoteService.get_instrument_atm_quote_list_by_period(
                 db_session, underlyer, start_date, end_date, is_primary)
         otc_atm_quote_schema = OtcAtmQuoteSchema(many=True, exclude=[])
-        return otc_atm_quote_schema.dump(atm_quote_dto_list).data
+        return otc_atm_quote_schema.dump(atm_quote_dto_list)
 
     @method
     async def save_otc_atm_quote_list(self):
@@ -40,7 +40,7 @@ class OtcAtmQuoteHandler(JsonRpcHandler):
             atm_quote_list.append(dto)
             atm_quote_dto_list = OtcAtmQuoteService.save_otc_atm_quote_list(db_session, atm_quote_list)
         otc_atm_quote_schema = OtcAtmQuoteSchema(many=True, exclude=[])
-        return otc_atm_quote_schema.dump(atm_quote_dto_list).data
+        return otc_atm_quote_schema.dump(atm_quote_dto_list)
 
     @method
     async def get_heat_map(self, trade_date=None):
@@ -52,7 +52,7 @@ class OtcAtmQuoteHandler(JsonRpcHandler):
             trade_date = DateTimeUtils.get_trading_day(trade_date, holidays, special_dates=[], step=2, direction=-1)
             heat_map_dto_list, diagnostics = OtcAtmQuoteService.get_heat_map(db_session, trade_date)
         heat_map_schema = HeatMapSchema(many=True, exclude=[])
-        return DiagnosticResponse(heat_map_schema.dump(heat_map_dto_list).data, diagnostics)
+        return DiagnosticResponse(heat_map_schema.dump(heat_map_dto_list), diagnostics)
 
 
 

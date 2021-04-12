@@ -243,7 +243,7 @@ class VolSurfaceExcelService:
                 logging.info('解析excel成功,标的为: %s' % instrument_id)
                 vol_surface_schema = VolSurfaceSchema()
                 # 序列化对象
-                vol_surface = vol_surface_schema.dump(vol_surface_dto).data
+                vol_surface = vol_surface_schema.dump(vol_surface_dto)
                 # 发送请求
                 VolSurfaceExcelService.send_post_request(vol_surface)
             except Exception as e:

@@ -15,5 +15,5 @@ class OptionStructureHandler(JsonRpcHandler):
                 option_dto_list = OptionStructureService.get_option_chain_by_variety_type(db_session, underlier,
                                                                                           trade_date, has_dividend)
         option_dto_schema = OptionStructureSchema(many=True, exclude=[])
-        return option_dto_schema.dump(option_dto_list).data
+        return option_dto_schema.dump(option_dto_list)
 

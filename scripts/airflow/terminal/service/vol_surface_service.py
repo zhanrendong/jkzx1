@@ -38,9 +38,9 @@ class VolSurfaceService:
         vol_surface_dbo.tag = vol_surface_dto.tag
         vol_surface_dbo.updatedAt = datetime.now()
         vol_surface_model_info = VolSurfaceModelInfoSchema()
-        vol_surface_dbo.modelInfo = vol_surface_model_info.dump(vol_surface_dto.modelInfo).data
+        vol_surface_dbo.modelInfo = vol_surface_model_info.dump(vol_surface_dto.modelInfo)
         vol_surface_fitting_models = FittingModelSchema(many=True)
-        vol_surface_dbo.fittingModels = vol_surface_fitting_models.dump(vol_surface_dto.fittingModels).data
+        vol_surface_dbo.fittingModels = vol_surface_fitting_models.dump(vol_surface_dto.fittingModels)
         return vol_surface_dbo
 
     @staticmethod

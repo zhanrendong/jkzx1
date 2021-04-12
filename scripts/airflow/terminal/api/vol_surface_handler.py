@@ -22,14 +22,14 @@ class FittingModelHandler(JsonRpcHandler):
                 vol_surface_dto = WingModelService.calc_fund_vol_surface(db_session, contract_type, observed_date, start_strike,
                                                                          end_strike, point_num, step, FittingModelStrikeType.valueOf(strike_type.upper()), days_in_year, calendar_name)
             vol_surface_schema = VolSurfaceSchema()
-            return vol_surface_schema.dump(vol_surface_dto).data
+            return vol_surface_schema.dump(vol_surface_dto)
 
     @method
     async def save_instrument_vol_surface(self, **kwargs):
         with self.make_session() as db_session:
             # kwargs = self.convert_snake_case_keys(kwargs)
             vol_surface_schema = VolSurfaceSchema()
-            vol_surface_dto = vol_surface_schema.load(kwargs).data
+            vol_surface_dto = vol_surface_schema.load(kwargs)
             vol_surface_dto = VolSurfaceService.save_vol_surface(db_session, vol_surface_dto)
         return vol_surface_dto
 
@@ -45,7 +45,7 @@ class FittingModelHandler(JsonRpcHandler):
             if vol_surface_dto is None:
                 raise CustomException(diagnostic.message)
         vol_surface_schema = VolSurfaceSchema(exclude=[])
-        return vol_surface_schema.dump(vol_surface_dto).data
+        return vol_surface_schema.dump(vol_surface_dto)
 
     @method
     async def get_latest_vol_surface(self, instrument_id, valuation_date,
@@ -59,6 +59,6 @@ class FittingModelHandler(JsonRpcHandler):
             if vol_surface_dto is None:
                 raise CustomException('没有找到对应的波动率曲面')
         vol_surface_schema = VolSurfaceSchema(exclude=[])
-        return vol_surface_schema.dump(vol_surface_dto).data
+        return vol_surface_schema.dump(vol_surface_dto)
 
 

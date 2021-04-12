@@ -13,7 +13,7 @@ class QuoteCloseHandler(JsonRpcHandler):
                                                                                                start_date,
                                                                                                end_date, is_primary)
         quote_close_schema = QuoteCloseSchema(many=True, exclude=[])
-        return quote_close_schema.dump(quote_close_dto_list).data
+        return quote_close_schema.dump(quote_close_dto_list)
 
     @method
     async def get_instrument_quote_close_batch(self, instrument_ids=[], trade_dates=[]):
@@ -23,14 +23,14 @@ class QuoteCloseHandler(JsonRpcHandler):
                                                                                              instrument_ids,
                                                                                              trade_dates)
         quote_close_schema = QuoteCloseSchema(many=True, exclude=[])
-        return quote_close_schema.dump(quote_close_dto_list).data
+        return quote_close_schema.dump(quote_close_dto_list)
 
     @method
     async def get_commodity_future_contract_list(self, variety_type=None, start_date=None, end_date=None):
         with self.make_session() as db_session:
             contract_list = CommodityFutureContractService.get_commodity_future_contract_list(db_session, variety_type, start_date, end_date)
         future_contract_schema = CommodityFutureContractSchema(many=True, exclude=[])
-        return future_contract_schema.dump(contract_list).data
+        return future_contract_schema.dump(contract_list)
 
 
 

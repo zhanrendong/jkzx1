@@ -18,7 +18,7 @@ class HistoricalVolHandler(JsonRpcHandler):
             realized_vol_dto_list, diagnostics = HistoricalVolService.calc_instrument_realized_vol(
                 db_session, instrument_id, DateTimeUtils.str2date(trade_date), windows, is_primary)
         realized_vol_schema = RealizedVolSchema(many=True, exclude=['tradeDate', 'instrumentId', 'percentile'])
-        return DiagnosticResponse(realized_vol_schema.dump(realized_vol_dto_list).data, diagnostics)
+        return DiagnosticResponse(realized_vol_schema.dump(realized_vol_dto_list), diagnostics)
 
     @method
     async def get_instrument_rolling_vol(self, instrument_id, start_date, end_date, window, is_primary=False):
@@ -28,7 +28,7 @@ class HistoricalVolHandler(JsonRpcHandler):
             realized_vol_dto_list, diagnostics = HistoricalVolService.calc_instrument_rolling_vol(
                 db_session, instrument_id, start_date_obj, end_date_obj, window, is_primary)
         realized_vol_schema = RealizedVolSchema(many=True, exclude=['instrumentId', 'percentile'])
-        return DiagnosticResponse(realized_vol_schema.dump(realized_vol_dto_list).data, diagnostics)
+        return DiagnosticResponse(realized_vol_schema.dump(realized_vol_dto_list), diagnostics)
 
     @method
     async def get_instrument_vol_cone(self, instrument_id, start_date, end_date,
@@ -41,7 +41,7 @@ class HistoricalVolHandler(JsonRpcHandler):
                 db_session, instrument_id, start_date_obj, end_date_obj,
                 windows, [percentile * 100 for percentile in percentiles], is_primary)
         vol_cone_schema = VolConeSchema(many=True, exclude=['vols.instrumentId', 'vols.tradeDate', 'vols.window'])
-        return DiagnosticResponse(vol_cone_schema.dump(vol_cone_dto_list).data, diagnostics)
+        return DiagnosticResponse(vol_cone_schema.dump(vol_cone_dto_list), diagnostics)
 
     @method
     async def get_historical_and_neutral_vol_list(self, instrument_ids, start_date, end_date, window, is_primary=False):
@@ -51,7 +51,7 @@ class HistoricalVolHandler(JsonRpcHandler):
             neutral_vol_list, diagnostics = HistoricalVolService.calc_historical_and_neutral_vol_list(
                 db_session, instrument_ids, start_date_obj, end_date_obj, window, is_primary)
         neutral_vol_schema = NeutralVolSchema(many=True)
-        return DiagnosticResponse(neutral_vol_schema.dump(neutral_vol_list).data, diagnostics)
+        return DiagnosticResponse(neutral_vol_schema.dump(neutral_vol_list), diagnostics)
 
     @staticmethod
     def check_date_params(db_session, start_date, end_date, window):

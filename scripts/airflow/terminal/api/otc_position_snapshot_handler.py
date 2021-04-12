@@ -16,5 +16,5 @@ class OTCPositionSnapshotHandler(JsonRpcHandler):
             vol_report_dto_list = OTCPositionSnapshotService.get_implied_vol_report(
                 db_session, instrument_id, report_date_obj)
         implied_vol_report_schema = ImpliedVolReportSchema(many=True, exclude=[])
-        return implied_vol_report_schema.dump(vol_report_dto_list).data
+        return implied_vol_report_schema.dump(vol_report_dto_list)
 
