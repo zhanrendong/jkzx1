@@ -3,41 +3,11 @@ import math
 import os
 import uuid
 import csvdiff
-import sqlalchemy
 import json
-from config.bct_config import pg_url
 from terminal import Logging
-import pandas as pd
 import chardet
-import numpy as np
 
 logging = Logging.getLogger(__name__)
-
-
-class RegressionResultTable:
-    table_name: str
-    key_columns: list
-    value_columns: list
-
-    def __init__(self, db_name, name, keys, values, roundings={}):
-        url = pg_url + '/' + db_name
-        engine = sqlalchemy.create_engine(url)
-        self.db = engine.connect()
-        self.table_name = name
-        self.key_columns = keys
-        self.value_columns = values
-        self.roundings = roundings
-
-    def reg_result_sql(self):
-        columns = self.key_columns + self.value_columns
-        sql = 'select ' + ','.join(columns) + ' from ' + self.table_name
-        logging.info('reg result SQL:%s' % sql)
-        return sql
-
-    def reg_result_dataframe(self):
-        sql = self.reg_result_sql()
-        df = pd.read_sql(sql, self.db)
-        return df.round(self.roundings)
 
 
 def write_to_csv(name, data):
@@ -101,7 +71,7 @@ def file_to_record(path):
     tmpfile = open(path, mode='rb')
     data = tmpfile.read()
     encoding = chardet.detect(data)["encoding"]
-    logging.info('file:%s encoding is %s' %(tmpfile.name,encoding))
+    logging.info('file:%s encoding is %s' % (tmpfile.name, encoding))
 
     with open(path, encoding=encoding) as f:
         rows = [{k: v for k, v in row.items()}
