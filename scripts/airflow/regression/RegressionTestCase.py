@@ -14,7 +14,7 @@ def write_to_csv(name, data):
     file_name = name + '.csv'
     keys = data[0].keys()
     logging.info('write data to csv file %s' % file_name)
-    with open(file_name, 'w', newline='') as output_file:
+    with open(file_name, 'w', newline='', encoding='utf8') as output_file:
         dict_writer = csv.DictWriter(output_file, keys)
         dict_writer.writeheader()
         dict_writer.writerows(data)

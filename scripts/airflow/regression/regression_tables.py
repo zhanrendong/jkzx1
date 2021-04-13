@@ -179,3 +179,25 @@ bct_otc_position_map = RegressionRedisDictListResult(
     values=['bookName', 'asset.underlyerInstrumentId', 'asset.underlyerMultiplier', 'productType'],
     roundings={'asset.underlyerMultiplier': 0}
 )
+
+future_contract_info = RegressionResultTable(
+    db_name='terminal_data',
+    name='market_data.future_contract_info',
+    keys=['contract_type', 'trade_date'],
+    values=['primary_contract_id', 'secondary_contract_id'],
+)
+
+terminal_realized_vol = RegressionResultTable(
+    db_name='terminal_data',
+    name='market_data.realized_vol',
+    keys=['instrument_id', 'valuation_date'],
+    values=['vol', 'exfsid', 'windows'],
+    roundings={'vol': 2}
+)
+
+vol_surface = RegressionResultTable(
+    db_name='terminal_data',
+    name='market_data.vol_surface',
+    keys=['instrument_id', 'valuation_date', 'instance'],
+    values=['model_info', 'fitting_model', 'strike_type', 'tag', 'tag'],
+)

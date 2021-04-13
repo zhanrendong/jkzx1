@@ -21,9 +21,12 @@ from regression.ImportTerminalCalendarTest import ImportTerminalCalendarTest
 from regression.ImportTerminalMarketDataTest import ImportTerminalMarketDataTest
 from regression.ImportTerminalTradeTest import ImportTerminalTradeTest
 from regression.SyncTerminalInstrumentTest import SyncTerminalInstrumentTest
+from regression.UpdateAllVolSurfaceTest import UpdateAllVolSurfaceTest
 from regression.UpdateBCTInstrumentTest import UpdateBCTInstrumentTest
 from regression.UpdateBCTQuoteTest import UpdateBCTQuoteTest
 from regression.UpdateCashflowTest import UpdateCashflowTest
+from regression.UpdateDaysInstrumentRealizedVolTest import UpdateDaysInstrumentRealizedVolTest
+from regression.UpdateEodOtcFutureContractTest import UpdateEodOtcFutureContractTest
 from regression.UpdateImpliedVolTest import UpdateImpliedVolTest
 from terminal.service import VolSurfaceService
 from trade_import.trade_import_fuc import trade_data_import
@@ -61,20 +64,17 @@ if __name__ == '__main__':
         ImportBCTTradeTest(current_date),
         ImportTerminalTradeTest(eod_start_date, eod_end_date),
         UpdateImpliedVolTest(eod_start_date, eod_end_date),
+        UpdateEodOtcFutureContractTest(eod_start_date, eod_end_date),
+        UpdateDaysInstrumentRealizedVolTest(eod_start_date.date(), eod_end_date.date()),
+        UpdateAllVolSurfaceTest(eod_start_date, eod_end_date),
         CacheCompanyTest(),
         UpdateCashflowTest(),
         CacheInstrumentTypeTest(),
         CacheOtcPositionTest(eod_end_date)
     ]
     for test_case in test_suite:
+        print(type(test_case))
         test_case.run(dump)
-    # # 10. eod_otc_future_contract_update_task(terminal_data), 需要更多的RB/IF标的和行情
-    # FutureContractInfoService.update_all_future_contract_info(eod_start_date - timedelta(days=300), eod_end_date,
-    #                                                           force_update=True)
-    # # 11. calc realized(historical) vol
-    # RealizedVolService.update_days_instrument_realized_vol(eod_end_date.date(), eod_end_date.date(), force_update=True)
-    # # 12. calc implied vol
-    # VolSurfaceService.update_all_vol_surface(eod_end_date.date(), eod_end_date.date(), 4)
     # # 17.run pv & greeks for all positions
     # basic_risks_default_close_pd_run(eod_end_date.date())
     # # 18. merge position and risk
